@@ -1,34 +1,77 @@
 
 const allButtons = document.getElementById('allbuttons')
 
-const display = document.getElementById('display')
+const operatorButtons = document.querySelectorAll('.operator')
 
-let x = 0
-let y = 0
-let operator;
+// function getOperator(){
+    // operatorButtons.addEventListener('click', (event)=>{
+    //     console.log(event.target.value)
+    // })
+// }
+    
+console.log(operatorButtons.value)
 
-numArray = [0,1,2,3,4,5,6,7,8,9]
+const display = document.getElementById('currentdisplay')
+const history = document.getElementById('history')
+
+
+let x=''
+let totals = []
+let final = 0
+
 
 allButtons.addEventListener('click', (event) =>{
     const buttonClick = event.target.nodeName === 'BUTTON'
-    if (!buttonClick){
-        return
+    if (event.target.dataset.type === 'number'){
+        console.log(event.target.value)
+        let addNumber = event.target.value
+        x += addNumber
+        console.log('Current value of x is ' + x)
+        display.textContent += event.target.textContent
+        // return newX
     }
-    // display.textContent = event.target.textContent
-    if (event.target.value in numArray){
-        let x = event.target.value
-        console.log('Current value of x is ' + event.target.value)
+
+    if (event.target.dataset.type === 'operator'){
+        let currentOperator = event.target.value
+        totals.push(currentOperator)
+        console.log('The operator that was pushed was ' + currentOperator)
+        
+        totals.push(x)
+            x = ''
+            console.log(totals)
+        // history.textContent = totals[0] + ' ' + event.target.value
+        // display.textContent = ''
+        // x = 0
+        
     }
 
-})
+    if (event.target.dataset.type === 'equal'){
+        totals.push(x)
+        console.table('The new array is ' + totals)
+        console.log('The equals was pushed ' + event.target.value)
+
+        final = operate(totals[0], parseInt(totals[1]),parseInt(totals[2])) 
+        console.log(final)
+
+        console.log('The result of ' + totals[1] + ' ' + totals[0] + ' ' + totals[2] + ' was ' + final)
+    } 
+})   
+    
+    // console.log(event.target.dataset.type)
 
 
 
-function operate(){
-    sum(),
-    substract(),
-    multiply(),
-    divide()
+
+function operate(op, x, y){
+    if (op === '+'){
+        sum(x,y)
+    } else if (op === '-'){
+        substract(x,y)
+    } else if (op === 'x'){
+        multiply(x,y)
+    } else if (op === '/'){
+        divide(x,y)
+    }
 }
 
 function sum(x, y){
@@ -40,7 +83,10 @@ function substract(x,y){
 }
 
 function multiply(x,y){
+    console.log(x)
+    console.log(y)
     return x*y
+
 }
 
 function divide(x,y){
