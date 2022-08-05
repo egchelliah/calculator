@@ -1,21 +1,27 @@
 
-const buttons = document.querySelector('buttons')
+const allButtons = document.getElementById('allbuttons')
 
-let buttonInputs = document.querySelectorAll('input')
+const display = document.getElementById('display')
 
-console.log(buttons)
+let x = 0
+let y = 0
+let operator;
 
-console.log(buttonInputs)
+numArray = [0,1,2,3,4,5,6,7,8,9]
 
-buttonInputs.forEach(e => e.addEventListener("click", (event)=>{
-    
-    console.log(event)
-
-    if(event.target.input==='7'){
-        console.log('7')
+allButtons.addEventListener('click', (event) =>{
+    const buttonClick = event.target.nodeName === 'BUTTON'
+    if (!buttonClick){
+        return
+    }
+    // display.textContent = event.target.textContent
+    if (event.target.value in numArray){
+        let x = event.target.value
+        console.log('Current value of x is ' + event.target.value)
     }
 
-}))
+})
+
 
 
 function operate(){
