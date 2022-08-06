@@ -12,6 +12,7 @@ const history = document.getElementById('history')
 let x=''
 let totals = []
 let result = 0
+let currentOperator = ''
 
 
 allButtons.addEventListener('click', (event) =>{
@@ -19,8 +20,17 @@ allButtons.addEventListener('click', (event) =>{
     if (event.target.dataset.type === 'number'){
         let addNumber = event.target.value
         x += addNumber
+
         console.log('Current value of x is ' + x)
+        console.log('Current value of totals is ' + totals)
+        
         display.textContent += event.target.textContent
+
+        // if (result){
+        //     display.textContent=''
+        // }
+
+                 
         // return newX
     }
 
@@ -29,15 +39,34 @@ allButtons.addEventListener('click', (event) =>{
             x = result
             console.log('Assing new x from the previous result ')
         }
-        let currentOperator = event.target.value
+        console.log('The array when this operator was hit is ' + totals)
+        if(totals.length===0){
+        currentOperator = event.target.value
         totals.push(currentOperator)
-        console.log('The operator that was pushed was ' + currentOperator)
-        
         totals.push(x)
-            x = ''
-            console.log(totals)
-        history.textContent = totals[1] + ' ' + event.target.value
+        
+        x = ''
+        history.textContent = totals[1] + ' ' + currentOperator
         display.textContent = ''
+        console.log('The operator that was pushed was ' + currentOperator)
+
+                
+        console.log(totals)
+        }
+        else if (totals.length===2){
+            totals.push(x)
+            console.log('The operator was hit again in a row ' + totals)
+            result = operate(totals[0], parseInt(totals[1]),parseInt(totals[2]))
+            console.log('The result of that double operator was ' + result)
+            currentOperator = event.target.value 
+            history.textContent = result + ' ' + currentOperator
+            display.textContent = ''
+            totals=[]
+            totals=[currentOperator,result]
+            x=''
+        }
+        
+
         // x = 0
         
     }
@@ -66,7 +95,9 @@ allButtons.addEventListener('click', (event) =>{
         display.textContent = ''
         history.textContent = ''
         x = ''
+        result = 0
         totals = []
+        currentOperator = ''
 
 
     }
