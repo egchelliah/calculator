@@ -5,6 +5,10 @@
     font-size: 25px;
 }
 
+.allbuttons{
+    display: flex;
+    flex-direction: column;
+}
 
 .calculator{
     margin-top: 100px;
@@ -22,7 +26,7 @@
     width: 300px;
 }
 
-#buttons{
+#calcbuttons{
     margin-top: 5px;
     display: inline-grid;
     grid-template-columns: repeat(4, 2fr);
@@ -44,4 +48,19 @@
 
 .calcbutton{
     /* border: 1px solid black; */
+}
+
+#history{
+    border:1px solid black;
+    height: 40px;
+}
+
+#currentdisplay{
+    border: 1px solid blue;
+}
+
+.display{
+    display: flex;
+    flex-direction: column;
+    gap:2px;
 }
