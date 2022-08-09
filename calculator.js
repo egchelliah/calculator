@@ -25,6 +25,8 @@ allButtons.addEventListener('click', (event) =>{
 
         console.log('Current value of x is ' + x)
         console.log('Current value of totals is ' + totals)
+        console.log('************************************************************************************')
+
         
         display.textContent += event.target.textContent
 
@@ -39,42 +41,51 @@ allButtons.addEventListener('click', (event) =>{
     // Store the operator value
     // Append the value of x to the array
     if (event.target.dataset.type === 'operator'){
+        currentOperator = event.target.value
         if(result !==0) {
             console.log('Making sure this block of code is hit when you hit the operator after a result')
             totals.push(currentOperator)
             totals.push(result)
             console.log('Assing new x from the previous equals sign and a new operator')
             console.log('The new array is ' + totals)
+            console.log('The value of x at this point is ' + x)
+            console.log('************************************************************************************')
+            history.textContent = result + ' ' + currentOperator
+            display.textContent = ''
             result = 0
         } 
-        
+
+        else if(result===0){        
     
-        console.log('The array when this operator was hit is ' + totals)
+            console.log('The array when this operator was hit is ' + totals)
 
-        if(totals.length===0){
-        currentOperator = event.target.value
-        totals.push(currentOperator)
-        totals.push(x)
-        
-        x = ''
-        history.textContent = totals[1] + ' ' + currentOperator
-        display.textContent = ''
-        console.log('The operator that was pushed was ' + currentOperator)
-
-                
-        console.log(totals)
-        }
-        else if (totals.length===2){
+            if(totals.length===0){
+            // currentOperator = event.target.value
+            totals.push(currentOperator)
             totals.push(x)
-            console.log('The operator was hit again in a row ' + totals)
-            doubleOperator = operate(totals[0], parseInt(totals[1]),parseInt(totals[2]))
-            console.log('The result of that double operator was ' + result)
-            totals = []
-            currentOperator = event.target.value 
-            history.textContent = doubleOperator + ' ' + currentOperator
+            
+            x = ''
+            history.textContent = totals[1] + ' ' + currentOperator
             display.textContent = ''
-            totals=[currentOperator, doubleOperator]
-            console.log('At the end of the second operator if block, the array of totals is ' + totals)       
+            console.log('The operator that was pushed was ' + currentOperator)
+            console.log(totals)
+            console.log('************************************************************************************')
+
+            }
+            else if (totals.length===2){
+                totals.push(x)
+                console.log('The operator was hit again in a row ' + totals)
+                doubleOperator = operate(totals[0], parseInt(totals[1]),parseInt(totals[2]))
+                console.log('The result of that double operator was ' + result)
+                totals = []
+                // currentOperator = event.target.value 
+                history.textContent = doubleOperator + ' ' + currentOperator
+                display.textContent = ''
+                totals=[currentOperator, doubleOperator]
+                console.log('At the end of the second operator if block, the array of totals is ' + totals)
+                console.log('************************************************************************************')
+       
+            }
         }
         
 
@@ -98,6 +109,8 @@ allButtons.addEventListener('click', (event) =>{
         console.log('The value of x after the equals is ' + x)
         console.log('The value of result at the end of the equals is ' + result)
         console.log('The value of the operator at the end of the equals is ' + currentOperator)
+        console.log('************************************************************************************')
+
 
         // console.log('The result of ' + totals[1] + ' ' + totals[0] + ' ' + totals[2] + ' was ' + final)
     }
@@ -109,6 +122,7 @@ allButtons.addEventListener('click', (event) =>{
         result = 0
         totals = []
         currentOperator = ''
+        console.log('************************************************************************************')
 
 
     }
@@ -124,7 +138,6 @@ function operate(op, x, y){
     if (op === '+'){
         finalNum = sum(x,y)
     } else if (op === '-'){
-        console.log('Hit the else statement in the operate function because of the -')
         finalNum = subtract(x,y)
     } else if (op === 'x'){
         finalNum = multiply(x,y)
@@ -140,7 +153,6 @@ function sum(x, y){
 }
 
 function subtract(x,y){
-    console.log('hit the subtract function')
     return x - y
 }
 
