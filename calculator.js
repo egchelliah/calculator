@@ -41,6 +41,7 @@ allButtons.addEventListener('click', (event) =>{
     // Store the operator value
     // Append the value of x to the array
     if (event.target.dataset.type === 'operator'){
+        
         currentOperator = event.target.value
         if(result !==0) {
             console.log('Making sure this block of code is hit when you hit the operator after a result')
